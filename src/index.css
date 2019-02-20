@@ -1,0 +1,43 @@
+body {
+  color: blue;
+}
+
+h1 {
+  color: chocolate;
+}
+
+button {
+  background-color: dimgray; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  margin:50px;
+  border:1px solid;
+}
+
+input {
+  height: 50px;
+  width: 180px;
+  font-size: 25px;
+  border:1px solid;
+}
+
+
+
+textarea {
+  height: 150px;
+  width: 280px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 25px;
+  resize: both;
+  overflow: auto;
+  border:1px solid;
+  align: bottom;
+  margin-top: 30px;
+}
