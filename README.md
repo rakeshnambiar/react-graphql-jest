@@ -89,12 +89,12 @@ There are two different pipelines available to deploy the build to the test.euro
      * 03-REDESIGN-SANITY-TEST
    
 ### What will happen if I commit to a feature/personal branch?**
-	The pipeline run only the below steps and there won't be any deployment to the testing server.
+	The pipeline run only the below steps and there won't be any deployment to the testing server:
       	  * install_npm_modules
 	  * run_unit_tests     
   
 ### What will happen if I commit to a `dev` branch?
-    The pipeline run only the below steps and deployment is based on the schedule time (which is every 30 minutes).
+    The pipeline run only the below steps and deployment is based on the schedule time (which is every 30 minutes):
 	 * install_npm_modules
 	 * run_unit_tests 
 	 * trigger_jenkins_build (as per the schedule)
