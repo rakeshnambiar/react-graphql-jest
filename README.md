@@ -66,3 +66,45 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+**Build pipeline**
+-------------------------
+There are two different pipelines available to deploy the build to the test.europepmc.org 
+
+### 1. GitLAB build pipeline
+   This pipeline is mainly responsible to Lint the code and run the Unit tests whenever there's a `Git Push` to any branch. It's mainly taken care the `VueJs` components and does not touch the wicket components at all.
+    
+### 2. Jenkins pipeline
+   This pipeline build both `VueJs and Wicket` components in case there is a new `Git Push` to the `dev` branch and it's scheduled to run every 30 minutes. However, the latest code will be in 2 different places (GitLab & Git)
+  
+### What are the build steps in GitLAB
+	- install_npm_modules
+	- run_unit_tests   
+	- trigger_jenkins_build [Trigger the deployment to the testing server]
+
+### What are the build steps in GitLAB?
+     - 01-REDESIGN-GITLAB-CODE-CHECKOUT [Checkout the latest code from the `dev` branch]
+     - 02-REDESIGN-BUILD-DEPLOY [Deploy to both Testing servers]
+     - 03-REDESIGN-SANITY-TEST
+   
+### What will happen if I commit to a feature/personal branch?**
+	 The pipeline run only the below steps and there won't be any deployment to the testing server.
+      -install_npm_modules
+	  -run_unit_tests     
+  
+### What will happen if I commit to a `dev` branch?
+    The pipeline run only the below steps and deployment is based on the schedule time (which is every 30 minutes).
+	 -install_npm_modules
+	 -run_unit_tests 
+	 -trigger_jenkins_build (as per the schedule)
+  
+### What will happen if I commit to a `master` branch?
+   The pipeline run only the below steps and deployment is the manual trigger.
+	 -install_npm_modules
+	 -run_unit_tests 
+	 -trigger_jenkins_build (manual trigger)  
+  
+Though the preferred job's schedule is every 30 minutes, to avoid the frequent deployment from multiple developers, the GitLab currently supports the minimum frequency 1 hour due to an open bug.
+ 
+https://gitlab.com/gitlab-org/gitlab-ce/issues/58148
